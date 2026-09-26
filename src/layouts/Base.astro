@@ -1,0 +1,58 @@
+---
+import '../styles/global.css';
+import logo from '../assets/logo.jpg';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Famiglie Adottive Alto Vicentino',
+  description = "Associazione di volontariato di famiglie adottive dell'Alto Vicentino: ci sosteniamo a vicenda, promuoviamo la cultura dell'adozione e organizziamo momenti di incontro.",
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <meta name="generator" content={Astro.generator} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Famiglie Adottive Alto Vicentino" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+  </head>
+  <body>
+    <a class="skip-link" href="#contenuto">Salta al contenuto</a>
+    <header class="site">
+      <div class="inner">
+        <a class="logo" href="/" aria-label="Torna alla home">
+          <img src={logo.src} alt="" width="64" height="64" />
+        </a>
+        <a class="brand" href="/">Famiglie Adottive Alto Vicentino</a>
+        <nav aria-label="Navigazione principale">
+          <a href="/chi-siamo/">Chi siamo</a>
+          <a href="/news/">News</a>
+          <a href="/contatti/">Contatti</a>
+        </nav>
+      </div>
+    </header>
+    <main id="contenuto"><slot /></main>
+    <footer class="site">
+      <p>Famiglie Adottive Alto Vicentino - Associazione di volontariato</p>
+      <p><small>ODV iscritta al registro regionale con provvedimento Ddr n. 558 del 11.10.2022</small></p>
+      <!-- TODO: aggiungere P.IVA, sede legale e link alle privacy policy -->
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+const news = (await getCollection('news')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+<Base title="News F.A.A.V." description="News, assemblee ed eventi dell'associazione Famiglie Adottive Alto Vicentino.">
+  <h1>News ed eventi</h1>
+  {news.length === 0 && <p>Non ci sono ancora news pubblicate.</p>}
+  {news.map((n) => (
+    <article class="news-card">
+      <time datetime={n.data.date.toISOString().slice(0, 10)}>
+        {n.data.date.toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' })}
+      </time>
+      <h2><a href={`/news/${n.id}/`}>{n.data.title}</a></h2>
+      {n.data.summary && <p>{n.data.summary}</p>}
+    </article>
+  ))}
+</Base>

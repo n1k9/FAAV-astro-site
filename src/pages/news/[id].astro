@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const news = await getCollection('news');
+  return news.map((n) => ({ params: { id: n.id }, props: { n } }));
+}
+
+interface Props {
+  n: CollectionEntry<'news'>;
+}
+
+const { n } = Astro.props;
+const { Content } = await render(n);
+---
+<Base title={`${n.data.title} — F.A.A.V.`} description={n.data.summary ?? `Notizia dell'associazione Famiglie Adottive Alto Vicentino del ${n.data.date.toLocaleDateString('it-IT')}.`}>
+  <article>
+    <time datetime={n.data.date.toISOString().slice(0, 10)}>
+      {n.data.date.toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' })}
+    </time>
+    <h1>{n.data.title}</h1>
+    <Content />
+  </article>
+  <p><a class="btn" href="/news/">Tutte le news</a></p>
+</Base>

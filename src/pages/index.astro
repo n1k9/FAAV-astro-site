@@ -1,11 +1,29 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+const news = (await getCollection('news')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 3);
 ---
-
-<Layout>
-	<Welcome />
-</Layout>
+<Base description="Siamo un'associazione di famiglie adottive dell'Alto Vicentino: ci sosteniamo a vicenda, promuoviamo la cultura dell'adozione e organizziamo momenti di incontro.">
+  <section>
+    <h1>Benvenuti in F.A.A.V.</h1>
+    <p>
+      Siamo un'associazione di famiglie adottive dell'Alto Vicentino: ci sosteniamo
+      a vicenda, promuoviamo la cultura dell'adozione e organizziamo momenti di
+      incontro per le famiglie e per i ragazzi. <!-- TODO: presentazione reale -->
+    </p>
+    <a class="btn" href="/news/">Leggi le ultime news</a>
+  </section>
+  <section>
+    <h2>Ultime notizie</h2>
+    {news.length === 0 && <p>Non ci sono ancora news. <a href="/news/">Tutte le news</a></p>}
+    {news.map((n) => (
+      <article class="news-card">
+        <time datetime={n.data.date.toISOString().slice(0, 10)}>
+          {n.data.date.toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' })}
+        </time>
+        <h3><a href={`/news/${n.id}/`}>{n.data.title}</a></h3>
+        {n.data.summary && <p>{n.data.summary}</p>}
+      </article>
+    ))}
+  </section>
+</Base>
