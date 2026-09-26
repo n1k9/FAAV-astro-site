@@ -1,3 +1,9 @@
+/* ---------------------------------------------------------------------------
+   Base: variabili, reset, elementi condivisi
+   Gli stili di header e footer stanno qui, nelle sezioni sotto: i selettori
+   sono gia' isolati dai nomi di classe (.site) e restano nel CSS unico
+   servito nell'<head>, che e' la resa piu' rapida.
+   --------------------------------------------------------------------------- */
 :root {
   --blu: #0066cc;
   --arancio: #ff6600;
@@ -13,6 +19,7 @@ body {
   background: var(--sfondo);
   line-height: 1.6;
 }
+/* Header (src/components/SiteHeader.astro) */
 header.site {
   background: white;
   border-bottom: 4px solid var(--giallo);
@@ -32,6 +39,7 @@ header.site .brand { font-size: 1.1rem; }
 header.site nav { margin-left: auto; display: flex; gap: 1.2rem; flex-wrap: wrap; }
 main { max-width: 900px; margin: auto; padding: 2rem 1rem; }
 main :is(h1, h2, h3) { line-height: 1.25; }
+/* Footer (src/components/SiteFooter.astro) */
 footer.site {
   background: var(--blu);
   color: white;
@@ -52,6 +60,9 @@ h1, h2 { color: var(--blu); }
   z-index: 10;
 }
 .skip-link:focus { left: 1rem; top: 1rem; }
+/* ---------------------------------------------------------------------------
+   Componenti e pagine
+   --------------------------------------------------------------------------- */
 .news-card, .doc-card {
   background: white;
   border-radius: 10px;

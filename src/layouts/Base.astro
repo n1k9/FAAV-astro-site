@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
-import logo from '../assets/logo.jpg';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
 
 interface Props {
   title?: string;
@@ -35,26 +36,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   </head>
   <body>
     <a class="skip-link" href="#contenuto">Salta al contenuto</a>
-    <header class="site">
-      <div class="inner">
-        <a class="logo" href="/" aria-label="Torna alla home">
-          <img src={logo.src} alt="" width="64" height="64" />
-        </a>
-        <a class="brand" href="/">Famiglie Adottive Alto Vicentino</a>
-        <nav aria-label="Navigazione principale">
-          <a href="/chi-siamo/">Chi siamo</a>
-          <a href="/news/">News</a>
-          <a href="/documenti/">Documenti</a>
-          <a href="/contatti/">Contatti</a>
-        </nav>
-      </div>
-    </header>
+    <SiteHeader />
     <main id="contenuto"><slot /></main>
-    <footer class="site">
-      <p>Famiglie Adottive Alto Vicentino - Associazione di volontariato</p>
-      <p><small>Sede legale: via Santa Rosa n. 1, Thiene (VI)</small></p>
-      <p><small>ODV iscritta al registro regionale con provvedimento Ddr n. 558 del 11.10.2022</small></p>
-      <!-- TODO: aggiungere P.IVA e link alle privacy policy -->
-    </footer>
+    <SiteFooter />
   </body>
 </html>

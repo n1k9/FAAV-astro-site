@@ -21,7 +21,7 @@ public/
 └── img/                # immagini referenziate dai contenuti
 src/
 ├── assets/             # immagini importate (passate da Vite)
-├── components/         # componenti riusabili (es. DocumentoPdf.astro)
+├── components/         # SiteHeader, SiteFooter, DocumentoPdf
 ├── content/
 │   ├── news/           # articoli .md della collection "news"
 │   └── documenti/      # schede .md della collection "documenti"

@@ -1,0 +1,22 @@
+---
+import logo from '../assets/logo.jpg';
+
+const links = [
+  { href: '/chi-siamo/', label: 'Chi siamo' },
+  { href: '/news/', label: 'News' },
+  { href: '/documenti/', label: 'Documenti' },
+  { href: '/contatti/', label: 'Contatti' },
+];
+---
+
+<header class="site">
+  <div class="inner">
+    <a class="logo" href="/" aria-label="Torna alla home">
+      <img src={logo.src} alt="" width="64" height="64" />
+    </a>
+    <a class="brand" href="/">Famiglie Adottive Alto Vicentino</a>
+    <nav aria-label="Navigazione principale">
+      {links.map((link) => <a href={link.href}>{link.label}</a>)}
+    </nav>
+  </div>
+</header>
