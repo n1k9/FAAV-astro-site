@@ -1,0 +1,30 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const documenti = (await getCollection('documenti')).sort(
+  (a, b) => a.data.order - b.data.order || a.data.title.localeCompare(b.data.title, 'it'),
+);
+---
+
+<Base title="Documenti — F.A.A.V." description="Statuti, regolamenti e altri documenti ufficiali dell'associazione Famiglie Adottive Alto Vicentino.">
+  <h1>Documenti</h1>
+  <p>Statuti, regolamenti e altri documenti ufficiali dell'associazione.</p>
+
+  {documenti.length === 0 && <p>Non ci sono ancora documenti pubblicati.</p>}
+
+  {documenti.map((doc) => (
+    <article class="doc-card">
+      <h2><a href={doc.data.page ?? doc.data.file}>{doc.data.title}</a></h2>
+      {doc.data.description && <p>{doc.data.description}</p>}
+      {doc.data.updated && (
+        <p>
+          <small>
+            Aggiornato al {doc.data.updated.toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' })}
+          </small>
+        </p>
+      )}
+      <p><a class="btn" href={doc.data.file} download>Scarica il PDF</a></p>
+    </article>
+  ))}
+</Base>

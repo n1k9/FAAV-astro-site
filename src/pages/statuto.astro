@@ -1,12 +1,27 @@
 ---
 import Base from '../layouts/Base.astro';
+import DocumentoPdf from '../components/DocumentoPdf.astro';
+import { getEntry } from 'astro:content';
+
+const statuto = await getEntry('documenti', 'statuto');
 ---
-<Base title="Statuto — F.A.A.V." description="Statuto dell'associazione Famiglie Adottive Alto Vicentino.">
+
+<Base
+  title="Statuto — F.A.A.V."
+  description="Statuto dell'associazione Famiglie Adottive Alto Vicentino, revisione 2020, in PDF."
+>
   <h1>Statuto</h1>
-  <!-- TODO: inserire il testo dello statuto dell'associazione -->
-  <p>
-    Il testo dello statuto non è ancora disponibile. Per richiederlo scrivici a
-    <a href="mailto:famiglieadottivealtovicentino@gmail.com">famiglieadottivealtovicentino@gmail.com</a>.
-  </p>
-  <p><a href="/chi-siamo/">Torna a Chi siamo</a></p>
+
+  {statuto ? (
+    <>
+      {statuto.data.description && <p>{statuto.data.description}</p>}
+      <DocumentoPdf file={statuto.data.file} title={statuto.data.title} label="Scarica lo statuto" />
+      <p><a href="/documenti/">Tutti i documenti</a></p>
+    </>
+  ) : (
+    <p>
+      Il testo dello statuto non è ancora disponibile. Per richiederlo scrivici a
+      <a href="mailto:famiglieadottivealtovicentino@gmail.com">famiglieadottivealtovicentino@gmail.com</a>.
+    </p>
+  )}
 </Base>

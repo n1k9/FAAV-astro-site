@@ -44,6 +44,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         <nav aria-label="Navigazione principale">
           <a href="/chi-siamo/">Chi siamo</a>
           <a href="/news/">News</a>
+          <a href="/documenti/">Documenti</a>
           <a href="/contatti/">Contatti</a>
         </nav>
       </div>
@@ -51,8 +52,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <main id="contenuto"><slot /></main>
     <footer class="site">
       <p>Famiglie Adottive Alto Vicentino - Associazione di volontariato</p>
+      <p><small>Sede legale: via Santa Rosa n. 1, Thiene (VI)</small></p>
       <p><small>ODV iscritta al registro regionale con provvedimento Ddr n. 558 del 11.10.2022</small></p>
-      <!-- TODO: aggiungere P.IVA, sede legale e link alle privacy policy -->
+      <!-- TODO: aggiungere P.IVA e link alle privacy policy -->
     </footer>
   </body>
 </html>

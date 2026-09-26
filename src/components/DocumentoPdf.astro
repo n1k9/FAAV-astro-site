@@ -1,0 +1,21 @@
+---
+interface Props {
+  file: string;
+  title: string;
+  label?: string;
+}
+
+const { file, title, label = 'Scarica il PDF' } = Astro.props;
+---
+
+<div class="pdf-embed">
+  <object data={file} type="application/pdf" height="820" aria-label={`Anteprima di ${title} in PDF`}>
+    <p>
+      Il PDF non può essere visualizzato nel browser.
+      <a href={file} download>Scarica {title}</a>.
+    </p>
+  </object>
+</div>
+<p class="pdf-actions">
+  <a class="btn" href={file} download>{label}</a>
+</p>
